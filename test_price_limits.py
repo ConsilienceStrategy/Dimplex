@@ -73,8 +73,8 @@ class DailyCheck(unittest.TestCase):
 
     def prices(self, cheap=8.0, last_day=None):
         last_day = last_day or self.tomorrow
-        days = {last_day - timedelta(i): [cheap] * 6 + [40.0] * 18 for i in range(30)}
-        days = {d: [cheap] * 6 + [40.0] * (pl.hours_in(d) - 6) for d in days}
+        days = [last_day - timedelta(i) for i in range(30)]
+        days = {d: [cheap] * 10 + [40.0] * (pl.hours_in(d) - 10) for d in days}
         return lambda first, last: as_prices(days)
 
     def run_check(self, state, fetch, now=None):
@@ -92,7 +92,7 @@ class DailyCheck(unittest.TestCase):
         title, body = sent[0]
         self.assertEqual(title, "Heat pump: set green 8, red 13")
         self.assertIn("Was 20 / 40 ct", body)
-        self.assertIn("Tomorrow: 0 green · 6 yellow · 18 red.", body)
+        self.assertIn("Tomorrow: 0 green · 10 yellow · 14 red.", body)
 
     def test_silent_when_close(self):
         state = {"green": 9, "red": 14, "checked_for": None, "failing_since": None}
