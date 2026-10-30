@@ -26,8 +26,8 @@ from zoneinfo import ZoneInfo
 
 # --- Settings: tune here -----------------------------------------------------
 WINDOW_DAYS = 14         # days the limits learn from, ending with tomorrow
-GREEN_HOURS = 5          # a charging day has at least this many green hours
-GREEN_PERCENTILE = 22.5  # green limit: this percentile, across days, of each
+GREEN_HOURS = 4          # a charging day has at least this many green hours
+GREEN_PERCENTILE = 20    # green limit: this percentile, across days, of each
                          #   day's GREEN_HOURS-th cheapest hour
 FREE_HOURS = 8           # hours per day that should stay out of red
 RED_PERCENTILE = 95      # red limit: this percentile, across days, of each
@@ -198,7 +198,7 @@ def backtest(state, weeks=BACKTEST_WEEKS, fetch=fetch_prices, today=None):
     lines += ["",
               f"Reminders: {pings} in {weeks} weeks ({pings / weeks:.1f} per week).",
               f"Charging days: {charging} of {checked} ({charging / checked:.0%}); "
-              f"aim: 1 in 4-5 (20-25%).",
+              f"aim: about 1 in 5 (20%).",
               f"Days with fewer than {FREE_HOURS} non-red hours: {short} ({short / checked:.0%}); "
               f"aim: 10-15%.",
               f"Hours red: {red_hours / all_hours:.0%}."]

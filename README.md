@@ -45,7 +45,7 @@ Tomorrow: 6 green · 9 yellow · 9 red.
 
 - **Green / red:** the new limits to type into the app, in spot ct/kWh.
 - **All-in:** the rough price you pay at those limits (20 ct + 1.19 × spot).
-- **Charging days:** days in the window with at least 5 green hours under the
+- **Charging days:** days in the window with at least 4 green hours under the
   new limits.
 - **Tomorrow:** how tomorrow's 24 hours split up under the new limits.
 
@@ -64,9 +64,9 @@ tell it what the app really shows, in one of two ways:
 
 The tool looks at the 14 days ending with tomorrow, averaging prices to hours.
 
-- **Green:** for each day it takes the 5th-cheapest hour. Of those 14 values,
-  green is set at the 22.5th percentile. So about one day in four or five has
-  5 or more hours below green, which is enough to charge the house for the
+- **Green:** for each day it takes the 4th-cheapest hour. Of those 14 values,
+  green is set at the 20th percentile. So about one day in five has 4 or
+  more hours below green, which is enough to charge the house for the
   next few days.
 - **Red:** for each day it takes the 8th-cheapest hour. Red is set at the
   95th percentile of those, so that on most days at least 8 hours stay out
