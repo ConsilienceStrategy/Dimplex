@@ -1,0 +1,56 @@
+name: Heat pump limits
+
+on:
+  schedule:
+    # Times are UTC. Day-ahead prices appear around 13:00 Berlin time.
+    # These run at 13:45 and 16:45 in winter, 14:45 and 17:45 in summer.
+    # The second run only acts if the first found no prices.
+    - cron: "45 12 * * *"
+    - cron: "45 15 * * *"
+  workflow_dispatch:
+    inputs:
+      action:
+        description: What to do
+        type: choice
+        options: [check now, set limits, backtest, test push]
+        default: check now
+      green:
+        description: Green limit now set in the app (for "set limits")
+        required: false
+      red:
+        description: Red limit now set in the app (for "set limits")
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: heat-pump-limits
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - name: Run
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          ACTION: ${{ inputs.action || 'check now' }}
+          GREEN: ${{ inputs.green }}
+          RED: ${{ inputs.red }}
+        run: |
+          case "$ACTION" in
+            "check now")  python3 price_limits.py ;;
+            "set limits") python3 price_limits.py set "$GREEN" "$RED" ;;
+            "backtest")   python3 price_limits.py backtest ;;
+            "test push")  python3 price_limits.py test-push ;;
+          esac
+      - name: Save state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state.json
+          git diff --cached --quiet || { git commit -m "State: $ACTION"; git push; }
+        env:
+          ACTION: ${{ inputs.action || 'daily check' }}
