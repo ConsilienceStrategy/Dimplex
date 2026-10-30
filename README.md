@@ -6,7 +6,7 @@ to week, so fixed limits go stale.
 
 Every afternoon, after tomorrow's prices are out, this tool recomputes both
 limits from the last two weeks. It sends a push to your phone only when a
-limit should move by 3 ct or more. Most days it stays silent. It never touches
+limit should move by 2 ct or more. Most days it stays silent. It never touches
 the heat pump.
 
 It runs on GitHub Actions for free, with no device at home.

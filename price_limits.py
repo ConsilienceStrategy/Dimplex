@@ -34,7 +34,7 @@ RED_PERCENTILE = 95      # red limit: this percentile, across days, of each
                          #   day's FREE_HOURS-th cheapest hour. High on purpose:
                          #   prices drift, so past days overstate future cover
 MIN_GAP_CT = 5           # red stays at least this far above green
-PING_CT = 3              # remind me when either limit moves this much or more
+PING_CT = 2              # remind me when either limit moves this much or more
 FEE_BASE_CT = 20         # all-in price ≈ FEE_BASE_CT + FEE_FACTOR × spot
 FEE_FACTOR = 1.19
 GIVE_UP_HOUR = 16        # Berlin time: no prices by now -> send a failure notice
