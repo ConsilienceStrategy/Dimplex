@@ -30,9 +30,11 @@ It runs on GitHub Actions for free, with no device at home.
    **test push**, then **Run workflow**. Your phone should buzz within a
    minute.
 
-That's it. The check runs every day at 13:45 and 16:45 Berlin time in winter,
-and 14:45 and 17:45 in summer. The second run only acts if the first found no
-prices yet.
+That's it. The check is scheduled four times a day: 10:45, 12:15, 13:45 and
+16:45 Berlin time in winter, an hour later in summer. GitHub often starts
+scheduled runs hours late, so the early slots tend to arrive in the
+afternoon. The first run that finds tomorrow's prices does the check; the
+others do nothing.
 
 ## A reminder looks like this
 
