@@ -42,14 +42,16 @@ others do nothing.
 Heat pump: set green 8, red 26
 Was 10 / 23 ct spot. All-in ≈ 30 / 51 ct.
 Last 14 days: 4 charging days, 40% of hours red.
-Tomorrow: 6 green · 9 yellow · 9 red.
+Tomorrow: 6 green · 9 yellow · 9 red (now 8 · 5 · 11).
 ```
 
 - **Green / red:** the new limits to type into the app, in spot ct/kWh.
 - **All-in:** the rough price you pay at those limits (20 ct + 1.19 × spot).
 - **Charging days:** days in the window with at least 4 green hours under the
   new limits.
-- **Tomorrow:** how tomorrow's 24 hours split up under the new limits.
+- **Tomorrow:** how tomorrow's 24 hours split up under the new limits. In
+  brackets, the same under the limits set now, so you can see whether the
+  change matters for tomorrow.
 
 ## If you didn't change the limits
 

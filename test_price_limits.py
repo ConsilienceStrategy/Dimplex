@@ -92,7 +92,7 @@ class DailyCheck(unittest.TestCase):
         title, body = sent[0]
         self.assertEqual(title, "Heat pump: set green 8, red 13")
         self.assertIn("Was 20 / 40 ct", body)
-        self.assertIn("Tomorrow: 0 green · 10 yellow · 14 red.", body)
+        self.assertIn("Tomorrow: 0 green · 10 yellow · 14 red (now 10 · 14 · 0).", body)
 
     def test_silent_when_close(self):
         state = {"green": 9, "red": 14, "checked_for": None, "failing_since": None}

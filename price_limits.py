@@ -123,10 +123,11 @@ def reminder(new, current, window, tomorrow):
     charging = sum(c[0] >= GREEN_HOURS for c in counts)
     red_share = sum(c[2] for c in counts) / sum(map(len, window.values()))
     tg, ty, tr = colors(tomorrow, g, r)
+    ng, ny, nr = colors(tomorrow, *current)
     title = f"Heat pump: set green {g}, red {r}"
     body = (f"Was {current[0]} / {current[1]} ct spot. All-in ≈ {all_in(g)} / {all_in(r)} ct.\n"
             f"Last {len(window)} days: {charging} charging days, {red_share:.0%} of hours red.\n"
-            f"Tomorrow: {tg} green · {ty} yellow · {tr} red.")
+            f"Tomorrow: {tg} green · {ty} yellow · {tr} red (now {ng} · {ny} · {nr}).")
     return title, body
 
 
