@@ -69,14 +69,14 @@ tell it what the app really shows, in one of two ways:
 The tool looks at the 14 days ending with tomorrow, averaging prices to hours.
 
 - **Green:** for each day it takes the 4th-cheapest hour. Of those 14 values,
-  green is set at the 20th percentile. So about one day in five has 4 or
-  more hours below green, which is enough to charge the house for the
+  green is set at the 15th percentile. So about one day in five or six has
+  4 or more hours below green, which is enough to charge the house for the
   next few days.
-- **Red:** for each day it takes the 8th-cheapest hour. Red is set at the
-  95th percentile of those, so that on most days at least 8 hours stay out
-  of red for hot water. The percentile sits high on purpose: prices drift,
+- **Red:** for each day it takes the 6th-cheapest hour. Red is set at the
+  95th percentile of those, so that on most days at least 6 hours stay out
+  of red: about as long as the heat pump runs in a day, hot water included. The percentile sits high on purpose: prices drift,
   so a limit learned from past days covers fewer of the coming days. In the
-  backtest (June to October 2026), 83–89% of days kept 8 hours out of red,
+  backtest (June to mid-November 2026), 81–85% of days kept 6 hours out of red,
   depending on the period.
 - Both are rounded to whole cents, and red stays at least 5 ct above green.
 
