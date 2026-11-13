@@ -3,8 +3,10 @@ name: Heat pump limits
 on:
   schedule:
     # Times are UTC. Day-ahead prices appear around 13:00 Berlin time, but
-    # GitHub often starts scheduled runs hours late, so two slots start early.
+    # GitHub starts scheduled runs 6-10 hours late, so four slots start early.
     # A run that finds no prices yet, or the day already checked, does nothing.
+    - cron: "45 6 * * *"
+    - cron: "15 8 * * *"
     - cron: "45 9 * * *"
     - cron: "15 11 * * *"
     - cron: "45 12 * * *"
