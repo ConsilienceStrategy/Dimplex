@@ -21,6 +21,7 @@ from collections import defaultdict
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from statistics import mean
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
@@ -220,6 +221,18 @@ def push(title, body, correction_link=False, dry_run=False):
     if correction_link and repo:
         url = f"https://github.com/{repo}/actions/workflows/limits.yml"
         headers["Actions"] = f"view, Didn't change them?, {url}"
+    email = os.environ.get("NTFY_EMAIL")
+    if email:
+        try:
+            send_ntfy(topic, body, {**headers, "Email": email})
+            return
+        except HTTPError as err:
+            # ntfy.sh limits forwarded emails; the push alone still matters.
+            print(f"Email copy refused ({err.code}); sending push only.")
+    send_ntfy(topic, body, headers)
+
+
+def send_ntfy(topic, body, headers):
     request = Request(f"https://ntfy.sh/{topic}", data=body.encode(), headers=headers)
     urlopen(request, timeout=30).close()
 
