@@ -221,16 +221,22 @@ def push(title, body, correction_link=False, dry_run=False):
     if correction_link and repo:
         url = f"https://github.com/{repo}/actions/workflows/limits.yml"
         headers["Actions"] = f"view, Didn't change them?, {url}"
-    email = os.environ.get("NTFY_EMAIL")
-    if email:
+    # Most complete first: with the account token and the email copy, then
+    # without the email, then anonymously, so a refused extra never costs the push.
+    token, email = os.environ.get("NTFY_TOKEN"), os.environ.get("NTFY_EMAIL")
+    auth = {"Authorization": f"Bearer {token}"} if token else {}
+    attempts = [{**headers, **auth, "Email": email}] if email else []
+    attempts += [{**headers, **auth}, headers]
+    for attempt in [a for n, a in enumerate(attempts) if a not in attempts[:n]]:
         try:
-            send_ntfy(topic, body, {**headers, "Email": email})
+            send_ntfy(topic, body, attempt)
             return
         except HTTPError as err:
-            # ntfy.sh limits forwarded emails; the push alone still matters.
+            if attempt == headers:
+                raise
             reason = err.read().decode(errors="replace").strip()[:300]
-            print(f"Email copy refused ({err.code}: {reason}); sending push only.")
-    send_ntfy(topic, body, headers)
+            print(f"ntfy refused {'the email copy' if 'Email' in attempt else 'the token'} "
+                  f"({err.code}: {reason}); trying without it.")
 
 
 def send_ntfy(topic, body, headers):

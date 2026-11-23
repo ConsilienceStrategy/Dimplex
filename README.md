@@ -20,9 +20,11 @@ It runs on GitHub Actions for free, with no device at home.
 2. **Secret.** On GitHub, open this repository, then **Settings → Secrets and
    variables → Actions → New repository secret**. Name: `NTFY_TOPIC`.
    Value: your topic name.
-   Optional but recommended: a second secret named `NTFY_EMAIL` with your
-   email address. Each push then also arrives by email. On iPhones, ntfy
+   Optional but recommended: an email copy of each push. On iPhones, ntfy
    sometimes misses a push, and its server keeps messages only 12 hours.
+   ntfy.sh forwards emails only for account holders: sign up at ntfy.sh,
+   create an access token under Account, and add two more secrets:
+   `NTFY_TOKEN` (the token) and `NTFY_EMAIL` (your email address).
 3. **Permissions.** **Settings → Actions → General**: allow actions, and under
    *Workflow permissions* choose **Read and write permissions**. The tool
    saves its state back to the repository. If the organization locks this

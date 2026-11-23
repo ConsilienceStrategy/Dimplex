@@ -41,6 +41,7 @@ jobs:
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           NTFY_EMAIL: ${{ secrets.NTFY_EMAIL }}
+          NTFY_TOKEN: ${{ secrets.NTFY_TOKEN }}
           ACTION: ${{ inputs.action || 'check now' }}
           GREEN: ${{ inputs.green }}
           RED: ${{ inputs.red }}
