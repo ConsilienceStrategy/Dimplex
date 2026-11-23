@@ -228,7 +228,8 @@ def push(title, body, correction_link=False, dry_run=False):
             return
         except HTTPError as err:
             # ntfy.sh limits forwarded emails; the push alone still matters.
-            print(f"Email copy refused ({err.code}); sending push only.")
+            reason = err.read().decode(errors="replace").strip()[:300]
+            print(f"Email copy refused ({err.code}: {reason}); sending push only.")
     send_ntfy(topic, body, headers)
 
 
