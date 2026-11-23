@@ -125,7 +125,7 @@ def reminder(new, current, window, tomorrow):
     red_share = sum(c[2] for c in counts) / sum(map(len, window.values()))
     tg, ty, tr = colors(tomorrow, g, r)
     ng, ny, nr = colors(tomorrow, *current)
-    title = f"Heat pump: set green {g}, red {r}"
+    title = f"HP: set green {g}, red {r}"
     body = (f"Was {current[0]} / {current[1]} ct spot. All-in ≈ {all_in(g)} / {all_in(r)} ct.\n"
             f"Last {len(window)} days: {charging} charging days, {red_share:.0%} of hours red.\n"
             f"Tomorrow: {tg} green · {ty} yellow · {tr} red (now {ng} · {ny} · {nr}).")
@@ -151,7 +151,7 @@ def check(state, now, fetch=fetch_prices, notify=None):
     except Exception as err:
         print(f"Price source failed: {err}")
         if now.hour >= GIVE_UP_HOUR and not state.get("failing_since"):
-            notify("Heat pump: no prices today",
+            notify("HP: no prices today",
                    f"Couldn't get tomorrow's spot prices ({err}). "
                    "Limits unchanged; I'll try again tomorrow.")
             state = {**state, "failing_since": str(now.date())}
@@ -276,7 +276,7 @@ def main(argv):
                 f.write(f"```\n{report}\n```\n")
         return
     elif command == "test-push":
-        push("Heat pump reminders work",
+        push("HP reminders work",
              "Test from price_limits.py. Limit reminders will arrive here.", dry_run=dry_run)
         return
     else:

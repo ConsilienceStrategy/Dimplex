@@ -44,7 +44,7 @@ others do nothing.
 ## A reminder looks like this
 
 ```
-Heat pump: set green 8, red 26
+HP: set green 8, red 26
 Was 10 / 23 ct spot. All-in ≈ 30 / 51 ct.
 Last 14 days: 4 charging days, 40% of hours red.
 Tomorrow: 6 green · 9 yellow · 9 red (now 8 · 5 · 11).

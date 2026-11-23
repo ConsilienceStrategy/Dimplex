@@ -90,7 +90,7 @@ class DailyCheck(unittest.TestCase):
         self.assertEqual(new["checked_for"], "2026-10-31")
         self.assertEqual(len(sent), 1)
         title, body = sent[0]
-        self.assertEqual(title, "Heat pump: set green 8, red 13")
+        self.assertEqual(title, "HP: set green 8, red 13")
         self.assertIn("Was 20 / 40 ct", body)
         self.assertIn("Tomorrow: 0 green · 10 yellow · 14 red (now 10 · 14 · 0).", body)
 
